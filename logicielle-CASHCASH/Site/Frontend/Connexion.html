@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/html">
+<head>
+  <title>PrestInfo </title>
+  <meta charset="utf-8">
+  <link rel="stylesheet" type="text/css" href="Connexion.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <!-- Haut de page -->
+    <header>
+        
+        <img class="logo" src="Image/logo.jpg" width="100">
+        <!-- Menu de naviguation  -->
+     <nav>
+         <ul>
+             <li> <a href="Accueil.html"> Accueil</a></li>
+             <li> <a href="">Actualité</a></li>
+             <li> <a href="contact.html">Contact</a></li>
+         </ul>
+     </nav>
+    </header>
+    
+
+    <!-- contenu sous forme de boite  -->
+
+    <div class="content">
+        <img class="imageaccueilanimé" src="Image/fondaccueil.svg" >
+    </div>
+    <script>
+        // Fonction de redirection dès qu'une option est sélectionnée
+        function redirectToPHP() {
+            // Récupérer la valeur de l'option sélectionnée
+            var entreprise = document.getElementById("Entreprise").value;
+
+            // Si "Healthcare ERP" est sélectionné, rediriger vers le script PHP
+            if (entreprise == "Healthcare ERP") {
+                window.location.href = "http://localhost/erp/process.php?Entreprise=" + entreprise;
+            }
+        }
+    </script>
+    <div class="blockFormulaire">
+        <img class="logoformulaire" src="Image/logo.jpg" width="200">
+        <div class="Formulaire">
+            <form>
+                <label for="Entreprise">Entreprise:</label>
+                <select name="Entreprise" id="Entreprise" onchange="redirectToPHP()">
+                    <option value="PresInfo"selected>PrestInfo</option>
+                    <option value="Healthcare ERP">Healthcare ERP</option>
+                </select><br><br>
+                <div class="form-group">
+                    <label for="email">Adresse email :</label>
+                    <input type="email" name="email" id="email" required placeholder="Entrez votre adresse email" />
+                </div>
+
+                <div class="form-group">
+                    <label for="password">Mot de passe :</label>
+                    <input type="password" name="password" id="password" required placeholder="Entrez votre mot de passe" />
+                </div>
+                <button type="submit" class="btn-submit">Se connecter</button>
+            </form>
+        </div>
+    </div>
+
+
+    <!-- Pied de page -->
+    <footer>
+        <p>
+            Copiright &copy; PrestInfo 2024/2025 ALL RIGHT RESERVED
+        </p>
+    </footer>
+</body>
+</html>
