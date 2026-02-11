@@ -1,0 +1,15 @@
+function afficherParagraphesDansNouveauDocument() {
+
+    const madiv = document.getElementById("div1");
+    const mesparDansMadiv = madiv.getElementsByTagName("p");
+
+    const newWindow = window.open("", "_blank");
+    const newDoc = newWindow.document;
+
+    newDoc.open();
+    for (let i = 0; i < mesparDansMadiv.length; i++) {
+        newDoc.write(`<p>${mesparDansMadiv[i].innerText}</p>`);
+    }
+
+    newDoc.close();
+    }
