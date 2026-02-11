@@ -1,0 +1,217 @@
+
+
+body {
+    background-color: #0F0D0D;
+    font-family: "Roboto", sans-serif;
+    padding-top: 110px; /* espace pour header fixe */
+    color: white;
+}
+
+img.Accueil {
+	margin-left: 5%;
+}
+
+
+
+/* ===== HEADER & NAVIGATION ===== */
+header {
+    position: fixed;
+    z-index: 2000;
+    width: 100%;
+    top: 0;
+    background-color: #000f26;
+    padding: 5px 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.container {
+    position: relative;
+    top: 0;
+    left: 0;
+    z-index: 100;
+    width: 100%;
+    height: 850px;
+    background-color: transparent; /* ou la même couleur que body */
+    overflow: hidden;
+    margin-top: 110px; /* espace pour header fixe */
+}
+
+.imageaccueilanimé {
+    position: absolute;
+    z-index: -1;
+    top: -1850px;  /* à ajuster selon ta page */
+    left: -1000px;  /* à ajuster selon ta page */
+    width: 3500px;
+    height: auto;
+}
+
+header h1.welcome, nav{
+	display: inline-block;
+	vertical-align: top;
+}
+header img.logo {
+	margin: 6px;
+}
+
+.logomenu {
+	float: right; /* Décale l'image à droite */
+	margin-top: 1%;
+	margin-right: 4%; /* Ajoute un espace entre l'image et le texte */ /* Limite la taille de l'image */
+	height: auto; /* Maintient les proportions */
+	border-radius: 20px;
+}
+
+
+nav ul {
+    margin: 0;
+    padding: 0;
+}
+
+nav ul li {
+    display: inline-block;
+}
+
+nav ul li a {
+    display: inline-block;
+    background-color: #000f26;
+    padding: 0 20px;
+    color: #06b8f8;
+    font-size: 25px;
+    text-decoration: none;
+    line-height: 60px; /* pour aligner verticalement */
+}
+
+nav ul li:hover a {
+    color: white;
+    background-color: #000f26;
+}
+
+.Connexion {
+    position: fixed;
+    top: 4%;
+    right: 0;
+    margin: 10px;
+}
+
+
+/* Connexion à droite */
+.Connexion {
+    position: fixed;
+    top: 4%;
+    right: 0;
+    margin: 10px;
+}
+
+/* ===== CONTENEUR STATISTIQUES ===== */
+.stats-container {
+    padding: 40px;
+    margin: auto;
+}
+
+.stats-box {
+    background-color: #074a62;
+    width: 85%;
+    padding: 40px;
+    border-radius: 20px;
+    color: white;
+    margin: auto;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+}
+
+/* ===== TITRE ===== */
+.stats-box h1 {
+    text-align: center;
+    font-size: 45px;
+    margin-bottom: 40px;
+}
+
+/* ===== FORMULAIRE ===== */
+.stats-form {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.stats-form label {
+    font-size: 18px;
+    margin-right: 10px;
+}
+
+.stats-form select,
+.stats-form input {
+    padding: 8px 12px;
+    border-radius: 8px;
+    border: none;
+    margin-right: 15px;
+    font-size: 15px;
+}
+
+.stats-form button {
+    padding: 10px 20px;
+    border-radius: 10px;
+    border: none;
+    background-color: #06b8f8;
+    color: #000f26;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.stats-form button:hover {
+    background-color: white;
+}
+
+/* ===== TABLEAU ===== */
+.table-wrapper {
+    overflow-x: auto;
+}
+
+.stats-table {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: white;
+    color: black;
+    border-radius: 15px;
+    overflow: hidden;
+}
+
+.stats-table th {
+    background-color: #000f26;
+    color: #06b8f8;
+    padding: 15px;
+    font-size: 16px;
+}
+
+.stats-table td {
+    padding: 12px;
+    text-align: center;
+}
+
+.stats-table tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+.stats-table tr:hover {
+    background-color: #d6ecf5;
+}
+
+/* ===== MESSAGE VIDE ===== */
+.stats-table td[colspan] {
+    padding: 30px;
+    font-style: italic;
+    color: #555;
+}
+
+/* ===== FOOTER ===== */
+footer {
+    background-color: black;
+    margin-top: 50px;
+}
+
+footer p {
+    color: white;
+    padding: 20px;
+    font-size: 14px;
+    text-align: center;
+}

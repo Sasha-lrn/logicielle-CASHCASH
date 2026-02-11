@@ -1,3 +1,6 @@
+body {
+    padding-top: 120px;
+}
 
 p{
 	color: black ;
@@ -20,18 +23,6 @@ body{
 	font-family: "Roboto";
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
 nav ul li a{
 	align-items: center;
  list-style-type: none;
@@ -40,7 +31,7 @@ nav ul li a{
  padding-right: 20px;
  color:#06b8f8;
  font-size: 25px;
-	text-decoration: none;
+	
 	margin-top: 20%;
 
 }

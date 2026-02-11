@@ -22,13 +22,6 @@ body{
 
 }
 
-
-
-
-
-
-
-
 button[type="submit"] {
 	background-color: #4CAF50;
 	color: white;
@@ -83,9 +76,11 @@ label {
 	border-radius: 8px;
 	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 	width: 100%;
-	max-width: 400px;
-
+	max-width: 100%;
 }
+
+
+
 .logoformulaire{
 	padding-left: 13%;
 	padding-bottom: 1%;
@@ -93,13 +88,6 @@ label {
 .form-group {
 	margin-bottom: 20px;
 }
-
-
-
-
-
-
-
 
 nav ul li a{
 	align-items: center;
@@ -138,13 +126,6 @@ header h1.welcome, nav{
 header img.logo {
 	margin: 0px;
 }
-
-
-
-
-
-
-
 
 
 .logomenu {
@@ -189,14 +170,6 @@ leftbox{
 	position: relative;
 	z-index: -2;
 }
-
-
-
-
-
-
-
-
 
 
 .content2{
@@ -256,16 +229,6 @@ div.content2 div ul li{
 }
 
 
-
-
-
-
-
-
-
-
-
-
 footer{
 	background-color: black;
 }
@@ -274,14 +237,6 @@ footer p {
 	padding-left: 20px;
 	font-size: 15px;
 }
-
-
-
-
-
-
-
-
 
 .container {
 	position: relative; /* Définit un contexte de positionnement pour l'image */
@@ -317,3 +272,7 @@ footer p {
 	color: white;
 }
 
+body {
+    background-color: #222;
+    margin: 0;
+}

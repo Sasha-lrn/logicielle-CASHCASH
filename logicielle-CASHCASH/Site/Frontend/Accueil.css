@@ -20,15 +20,6 @@ body{
 	font-family: "Roboto";
 }
 
-
-
-
-
-
-
-
-
-
 .Connexion{
 	position: fixed;
 	top: 4%;
@@ -69,7 +60,6 @@ header {
 header h1.welcome, nav{
 	display: inline-block;
 	vertical-align: top;
-	text-decoration: underline;
 }
 header img.logo {
 	margin: 6px;
