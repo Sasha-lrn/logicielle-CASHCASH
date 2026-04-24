@@ -36,7 +36,8 @@
                 
                 // Afficher les données
                 while ($ligne = $resultat1->fetch_assoc()) {
-                    echo "<tr>";
+                    $id = $ligne['NumClient'];
+                    echo '<tr class="ligne-clickable-Client" data-id="' . htmlspecialchars($id) . '">';
                     foreach ($ligne as $valeur) {
                         echo "<td>" . htmlspecialchars($valeur) . "</td>";
                     }
@@ -67,12 +68,18 @@
                 
                 // Afficher les données
                 while ($ligne = $resultat2->fetch_assoc()) {
-                    echo "<tr>";
-                    foreach ($ligne as $valeur) {
+
+                    $id = $ligne['Id_Intervention'];
+                
+                    echo '<tr class="ligne-clickable" data-id="' . htmlspecialchars($id) . '">';
+                
+                    foreach ($ligne as $colonne => $valeur) {
                         echo "<td>" . htmlspecialchars($valeur) . "</td>";
                     }
+                
                     echo "</tr>";
                 }
+                
                 
                 echo "</table>";
             } else {
