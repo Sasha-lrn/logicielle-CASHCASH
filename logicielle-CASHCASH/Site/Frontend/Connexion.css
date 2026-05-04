@@ -1,0 +1,318 @@
+
+p{
+	color: black ;
+	font-size: 30px;
+	font-weight: bold;
+}
+img.Accueil {
+	margin-left: 5%;
+}
+
+h1.welcome{
+	color: white;
+	background-color: #000f26;
+	font-weight: bold;
+	padding-left: 20px;
+}
+body{
+	overflow: hidden;
+	background-color: #ffffff;
+	font-family: "Roboto";
+
+
+}
+
+
+
+
+
+
+
+
+button[type="submit"] {
+	background-color: #F39C12;
+	color: white;
+	padding: 10px;
+	width: 100%;
+	border: none;
+	border-radius: 5px;
+	font-size: 16px;
+	cursor: pointer;
+	transition: background-color 0.3s ease;
+}
+
+button[type="submit"]:hover {
+	background-color: #d88c11;
+}
+
+input[type="email"],
+input[type="password"],
+select {
+	width: 100%;
+	padding: 10px;
+	border: 1px solid #ccc;
+	border-radius: 5px;
+	font-size: 16px;
+}
+
+input[type="email"]:focus,
+input[type="password"]:focus,
+select:focus {
+	border-color: #4CAF50;
+	outline: none;
+}
+select {
+	margin-top: 10px;
+}
+
+label {
+	font-size: 14px;
+	font-weight: bold;
+	color: #333;
+	display: block;
+	margin-bottom: 5px;
+	color: black;
+}
+
+.blockFormulaire{
+	padding-left: 35%;
+}
+.Formulaire{
+	padding: 30px;
+	background-color: #ffffff;
+	border-radius: 8px;
+	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+	width: 100%;
+	max-width: 400px;
+
+}
+.logoformulaire{
+	padding-left: 11%;
+	padding-bottom: 1%;
+}
+.form-group {
+	margin-bottom: 20px;
+}
+
+
+
+
+
+
+
+
+nav ul li a{
+	align-items: center;
+ list-style-type: none;
+ display: inline-block;
+ background-color: #f2f2f2;
+ padding-right: 20px;
+ color:#F39C12;
+ font-size: 25px;
+	text-decoration: none;
+	margin-top: 20%;
+}
+nav ul li {
+	display: inline-block;
+
+
+}
+nav ul li:hover a{
+	color: #d1850a;
+	background-color: #f2f2f2;
+}
+header {
+	position: fixed;
+	z-index: 200000;
+	background-color: #f2f2f2;
+	width: 100%;
+	top: 0;
+
+}
+header h1.welcome, nav{
+	display: inline-block;
+	vertical-align: top;
+	text-decoration: underline;
+}
+header img.logo {
+	margin: 6px;
+}
+
+
+
+
+
+
+
+
+
+.logomenu {
+	float: right; /* Décale l'image à droite */
+	margin-top: 7%;
+	margin-right: 5%; /* Ajoute un espace entre l'image et le texte */ /* Limite la taille de l'image */
+	height: auto; /* Maintient les proportions */
+	border-radius: 20px;
+}
+
+.content{
+	padding-top: 130px;
+}
+
+div.content div {
+	margin-left: 5%;
+	margin-right: 5%;
+	margin-top: 10px;
+	padding: 20px;
+	border-radius: 20px;
+	color: white;
+
+	background-color: #074a62;
+}
+div.content div h1 {
+	margin-left: 5%;
+	margin-top: 40px;
+	font-size: 50px;
+}
+
+
+div.content div p {
+	margin-left: 3%;
+	margin-right: 50%;
+	margin-top: 40px;
+	font-size: 31px;
+	color: white;
+	letter-spacing: 1px;
+	font-weight: normal;
+}
+leftbox{
+	position: relative;
+	z-index: -2;
+}
+
+
+
+
+
+
+
+
+
+
+.content2{
+	padding-bottom: 100px;
+
+}
+
+div.content2 div {
+	margin-left: 5%;
+	margin-right: 5%;
+	margin-top: 10px;
+	padding: 20px;
+	border-radius: 20px;
+	color: white;
+
+	background-color: #074a62;
+}
+div.content2 div h1 {
+	margin-left: 5%;
+	margin-top: 40px;
+	font-size: 50px;
+}
+
+
+div.content2 div p {
+	margin-left: 3%;
+	margin-right: 3%;
+	margin-top: 40px;
+	font-size: 31px;
+	color: white;
+	letter-spacing: 1px;
+	font-weight: normal;
+}
+div.content2 div ul{
+	margin-left: 3%;
+	margin-right: 3%;
+	margin-top: 40px;
+	font-size: 31px;
+	color: white;
+	letter-spacing: 1px;
+	font-weight: normal;
+}
+div.content2 div ul li{
+	padding-bottom: 14px;
+}
+
+.logoengagement {
+	float: left; /* Décale l'image à droite */
+	margin-top: 15px;
+	margin-right: 15px; /* Ajoute un espace entre l'image et le texte */ /* Limite la taille de l'image */
+	height: 140px; /* Maintient les proportions */
+	border-radius: 20px;
+}
+
+.taillecarre{
+	width: 40%;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+footer{
+	background-color: black;
+}
+footer p {
+	color: white;
+	padding-left: 20px;
+	font-size: 15px;
+}
+
+
+
+
+
+
+
+
+
+.container {
+	position: relative; /* Définit un contexte de positionnement pour l'image */
+	top:0;
+	left:0;
+	z-index: 100;
+	width: 100%;       /* Largeur du conteneur */
+	height: 850px;      /* Hauteur du conteneur */
+	background-color: black; /* Fond visible pour tester */
+	overflow: hidden;
+}
+.imageaccueilanimé {
+	position: absolute; /* Permet le placement à des coordonnées spécifiques */
+	z-index: -1;
+	top: -1850px;          /* Décale de 50px depuis le haut du conteneur */
+	left: -1000px;        /* Décale de 100px depuis la gauche du conteneur */
+	width: 3500px;       /* Largeur de l'image (facultatif) */
+	height: auto;       /* Maintient les proportions de l'image */
+
+
+}
+.Textedevantimage {
+	position: relative;
+	z-index: 75;
+	top: 200px;
+	margin-right: 5%;
+	margin-left: 5%;
+	font-weight: bold;
+	font-size: 5rem; /* Taille plus lisible pour le texte (32px si la base est 16px) */
+	width: auto; /* Permet à la largeur de s'ajuster au contenu */
+	max-width: 90%; /* Limite la largeur du texte à 90% du conteneur parent */
+	text-align: center;
+	color: white;
+}
+
