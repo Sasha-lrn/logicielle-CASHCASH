@@ -16,14 +16,21 @@ h1.welcome{
 }
 body{
 	overflow: hidden;
-	background-color: #0F0D0D;
+	background-color: #ffffff;
 	font-family: "Roboto";
 
 
 }
 
+
+
+
+
+
+
+
 button[type="submit"] {
-	background-color: #4CAF50;
+	background-color: #F39C12;
 	color: white;
 	padding: 10px;
 	width: 100%;
@@ -35,7 +42,7 @@ button[type="submit"] {
 }
 
 button[type="submit"]:hover {
-	background-color: #45a049;
+	background-color: #d88c11;
 }
 
 input[type="email"],
@@ -76,30 +83,34 @@ label {
 	border-radius: 8px;
 	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 	width: 100%;
-	max-width: 100%;
+	max-width: 400px;
+
 }
-
-
-
 .logoformulaire{
-	padding-left: 13%;
+	padding-left: 11%;
 	padding-bottom: 1%;
 }
 .form-group {
 	margin-bottom: 20px;
 }
 
+
+
+
+
+
+
+
 nav ul li a{
 	align-items: center;
  list-style-type: none;
  display: inline-block;
- background-color: #000f26;
+ background-color: #f2f2f2;
  padding-right: 20px;
- color:#06b8f8;
+ color:#F39C12;
  font-size: 25px;
 	text-decoration: none;
 	margin-top: 20%;
-
 }
 nav ul li {
 	display: inline-block;
@@ -107,13 +118,13 @@ nav ul li {
 
 }
 nav ul li:hover a{
-	color: white;
-	background-color: #000f26;
+	color: #d1850a;
+	background-color: #f2f2f2;
 }
 header {
 	position: fixed;
 	z-index: 200000;
-	background-color: #000f26;
+	background-color: #f2f2f2;
 	width: 100%;
 	top: 0;
 
@@ -124,8 +135,15 @@ header h1.welcome, nav{
 	text-decoration: underline;
 }
 header img.logo {
-	margin: 0px;
+	margin: 6px;
 }
+
+
+
+
+
+
+
 
 
 .logomenu {
@@ -170,6 +188,14 @@ leftbox{
 	position: relative;
 	z-index: -2;
 }
+
+
+
+
+
+
+
+
 
 
 .content2{
@@ -229,6 +255,16 @@ div.content2 div ul li{
 }
 
 
+
+
+
+
+
+
+
+
+
+
 footer{
 	background-color: black;
 }
@@ -237,6 +273,14 @@ footer p {
 	padding-left: 20px;
 	font-size: 15px;
 }
+
+
+
+
+
+
+
+
 
 .container {
 	position: relative; /* Définit un contexte de positionnement pour l'image */
@@ -272,7 +316,3 @@ footer p {
 	color: white;
 }
 
-body {
-    background-color: #222;
-    margin: 0;
-}

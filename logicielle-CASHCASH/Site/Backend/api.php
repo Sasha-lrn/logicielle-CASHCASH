@@ -11,8 +11,8 @@ function api($requete){
 
 
     $serveur = "localhost";
-    $utilisateur = "login5344";
-    $motdepasse = "tsoBPAwRCrAkJaX";
+    $utilisateur = "CashCash";
+    $motdepasse = "3878ShOrtmUSI(";
     $basededonnees = "cashcash";// à paramétrer tout ça 
 
     $connexion = new mysqli($serveur, $utilisateur, $motdepasse, $basededonnees);
@@ -26,9 +26,13 @@ function api($requete){
 switch ($request_method){
     case 'GET':
         if($requete == 'clients'){
-        echo getClientIntervention($connexion);
+        echo getClient($connexion);
         $connexion->close();
         break;}
+        elseif($requete == 'intervention'){
+            echo getIntervention($connexion);
+            $connexion->close();
+            break;}
         else if($requete == 'stats')
         {
             $techniciens = getListeTechniciens($connexion);

@@ -1,10 +1,8 @@
 
 
 body {
-    background-color: #0F0D0D;
+    background-color: #f4f5f7;
     font-family: "Roboto", sans-serif;
-    padding-top: 110px; /* espace pour header fixe */
-    color: white;
 }
 
 img.Accueil {
@@ -14,16 +12,23 @@ img.Accueil {
 
 
 /* ===== HEADER & NAVIGATION ===== */
-header {
-    position: fixed;
-    z-index: 2000;
-    width: 100%;
-    top: 0;
-    background-color: #000f26;
-    padding: 5px 20px;
+
+.header {
     display: flex;
-    align-items: center;
     justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #ddd;
+    padding-bottom: 16px;
+}
+
+
+
+header {
+	z-index: 200000;
+	background-color: #ededed;
+	width: 100%;
+	top: 0;
+
 }
 
 .container {
@@ -50,6 +55,7 @@ header {
 header h1.welcome, nav{
 	display: inline-block;
 	vertical-align: top;
+	text-decoration: none;
 }
 header img.logo {
 	margin: 6px;
@@ -64,44 +70,37 @@ header img.logo {
 }
 
 
-nav ul {
-    margin: 0;
-    padding: 0;
-}
 
+
+nav ul li a{
+	align-items: center;
+ list-style-type: none;
+ display: inline-block;
+ background-color: #ededed;
+ padding-right: 20px;
+ color:#181004;
+ font-size: 25px;
+	text-decoration: none;
+	margin-top: 20%;
+}
 nav ul li {
-    display: inline-block;
+	display: inline-block;
+
+
+}
+nav ul li:hover a{
+	color: #d1850a;
+	background-color: #ededed;
 }
 
-nav ul li a {
-    display: inline-block;
-    background-color: #000f26;
-    padding: 0 20px;
-    color: #06b8f8;
-    font-size: 25px;
-    text-decoration: none;
-    line-height: 60px; /* pour aligner verticalement */
-}
-
-nav ul li:hover a {
-    color: white;
-    background-color: #000f26;
-}
-
-.Connexion {
-    position: fixed;
-    top: 4%;
-    right: 0;
-    margin: 10px;
-}
 
 
 /* Connexion à droite */
-.Connexion {
-    position: fixed;
-    top: 4%;
-    right: 0;
-    margin: 10px;
+.Connexion{
+	position: fixed;
+	top: 4%;
+	right: 0;
+	margin: 10px;
 }
 
 /* ===== CONTENEUR STATISTIQUES ===== */
@@ -111,7 +110,7 @@ nav ul li:hover a {
 }
 
 .stats-box {
-    background-color: #074a62;
+    background-color: #83838a;
     width: 85%;
     padding: 40px;
     border-radius: 20px;
@@ -151,7 +150,7 @@ nav ul li:hover a {
     padding: 10px 20px;
     border-radius: 10px;
     border: none;
-    background-color: #06b8f8;
+    background-color: #cf8610;
     color: #000f26;
     font-weight: bold;
     cursor: pointer;
@@ -178,7 +177,7 @@ nav ul li:hover a {
 
 .stats-table th {
     background-color: #000f26;
-    color: #06b8f8;
+    color: #cf8610;
     padding: 15px;
     font-size: 16px;
 }
@@ -203,15 +202,3 @@ nav ul li:hover a {
     color: #555;
 }
 
-/* ===== FOOTER ===== */
-footer {
-    background-color: black;
-    margin-top: 50px;
-}
-
-footer p {
-    color: white;
-    padding: 20px;
-    font-size: 14px;
-    text-align: center;
-}

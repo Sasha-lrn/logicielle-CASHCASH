@@ -24,32 +24,15 @@ $stats = $data['stats'];
 <body>
 
 <header>
-    <img class="logo" src="Image/logoCashCash2.PNG" width="100">
-
-
-    <nav>
-        <ul>
-            <li><a href="index.html">Accueil</a></li>
-            <li><a href="Actualité.html">Actualité</a></li>
-            <li><a href="contact.html">Contact</a></li>
-            <li><a href="clients.php">Clients</a></li>
-            <li><a href="statistiques.php">Statistiques</a></li>
-        </ul>
-    </nav>
-
-    
-    <nav>
-        <ul>
-            <li><a href="Connexion.html" class="Connexion">Connexion</a></li>
-        </ul>
-    </nav>
-</header>
-
-
-    <img class="imageaccueilanimé" src="Image/fondaccueil.svg" alt="Fond Accueil" >
-   
-
-
+        
+        <img class="logo" src="Image/logoStatistique.png" width="100">
+        <!-- Menu de naviguation  -->
+     <nav>
+         <ul>
+             <li> <a href="menu.php">Menu</a></li>
+         </ul>
+     </nav>
+    </header>
 
 
 <div class="stats-container">
@@ -119,7 +102,4 @@ $stats = $data['stats'];
 
 </div>
 
-<footer>
-    <p>Copyright © PrestInfo 2024/2025 ALL RIGHT RESERVED</p>
-</footer>
 </html>

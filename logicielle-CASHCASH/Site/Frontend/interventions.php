@@ -1,5 +1,5 @@
 <?php 
-    $requete = 'clients';
+    $requete = 'intervention';
     include_once '../Backend/api.php' ?>
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/html">
@@ -16,7 +16,7 @@
     <!-- Haut de page -->
     <header>
         
-        <img class="logo" src="Image/logoClient.png" width="100">
+        <img class="logo" src="Image/logoIntervention.png" width="100">
         <!-- Menu de naviguation  -->
      <nav>
          <ul>
@@ -29,12 +29,12 @@
 
     <div class="blockFormulaire">
   <div class="Formulaire">
-  <button type="button" id="btnNouvelleIntervention">Nouveau client</button>
+  <button type="button" id="btnNouvelleIntervention">Nouvelle intervention</button>
 
 <script>
 document.getElementById("btnNouvelleIntervention").addEventListener("click", function() {
     // Redirection vers EditIntervention.php?id=
-    window.location.href = "EditClient.php?id=";
+    window.location.href = "EditIntervention.php?id=";
 });
 </script>
     <div class="table-wrapper">

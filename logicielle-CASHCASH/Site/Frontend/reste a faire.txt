@@ -1,0 +1,23 @@
+Ajouter la connexion puis si identifiant correct rediriger vers le menu.php
+
+Gerer les droits (afficher ce que dois voir le technicien et le gestionnaire)
+
+bouton ajotuer un clients -> donc rajouter requete rajout clients
+
+travailler sur l'API -> format JSON renvoyer -> les pages doivent appeler l'API
+
+Revoir les pages clients.php et interventions.php pour que les requetes sql soit dans "mes fonctiosn accès aux données et l'affichage soit dans la page directement
+
+Documenter le code 
+
+Essayer d'amelirorer la page Actualité et contact
+
+Ajouter la page Contract
+
+Ajouter la possibilité de généré des pdfs
+
+securiser l'API (JWT) 
+
+Voir pour Ajouter nom et prenom  en haut a droite sur la page menu (optionnel)
+
+Essayer d'amelirorer la page Actualité et contact (optionnel)
