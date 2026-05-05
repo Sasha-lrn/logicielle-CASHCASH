@@ -148,6 +148,33 @@ function getTousLesClients()
     return $pdo->query($sql)->fetchAll(PDO::FETCH_ASSOC);
 }
 
+function getClientsLourd() {
+
+    $pdo = PDO2::getInstance();
+
+    $sql = "SELECT NumClient, RaisonSociale, SIREN, CodeAPE, AdressePostale, 
+                   NumTel, NumTelecopie, Email, DistanceAgenceKm, 
+                   DuréeDeplacement, Num_Agence
+            FROM Client";
+
+    return $pdo->query($sql)->fetchAll(PDO::FETCH_ASSOC); }
+
+
+function getTousLesInterventions()
+{
+    $pdo = PDO2::getInstance();
+
+    $sql = "
+    SELECT id_Intervention, 
+    Date_, 
+    NumClient,
+    Matricule 
+    FROM `Intervention`;
+    ";
+
+    return $pdo->query($sql)->fetchAll(PDO::FETCH_ASSOC);
+}
+
 
 function getTousLesTechniciens()
 {
@@ -168,6 +195,68 @@ function getTousLesTechniciens()
     ";
 
     return $pdo->query($sql)->fetchAll(PDO::FETCH_ASSOC);
+}
+
+function getListeTechniciens()
+{
+    $pdo = PDO2::getInstance();
+
+    $sql = "
+        SELECT t.Matricule, t.Nom, t.Prenom 
+        FROM Technicien te
+        JOIN Employé t ON t.Matricule = te.Matricule
+        ORDER BY t.Nom, t.Prenom
+    ";
+
+    $stmt = $pdo->query($sql);
+
+    return $stmt->fetchAll(PDO::FETCH_ASSOC);
+}
+
+function getStatsTechnicien($mois, $annee, $matricule = null)
+{
+    $pdo = PDO2::getInstance();
+
+    $sql = "
+        SELECT 
+            t.Matricule,
+            t.Nom,
+            t.Prenom,
+            COUNT(DISTINCT i.Id_Intervention) AS NbInterventions,
+            SUM(c.DistanceAgenceKm) * 2 AS KmParcourus,
+            SEC_TO_TIME(SUM(TIME_TO_SEC(ipm.TempsIntervention))) AS TempsTotal
+        FROM Technicien te
+        JOIN Employé t ON t.Matricule = te.Matricule
+        JOIN Intervention i ON i.Matricule = te.Matricule
+        JOIN Client c ON c.NumClient = i.NumClient
+        JOIN InterventionParMateriel ipm ON ipm.Id_Intervention = i.Id_Intervention
+        WHERE MONTH(i.Date_) = :mois
+          AND YEAR(i.Date_) = :annee
+    ";
+
+    if ($matricule !== null) {
+        $sql .= " AND t.Matricule = :matricule";
+    }
+
+    $sql .= "
+        GROUP BY t.Matricule, t.Nom, t.Prenom
+        ORDER BY t.Nom, t.Prenom
+    ";
+
+    $stmt = $pdo->prepare($sql);
+
+    $params = [
+        ':mois' => $mois,
+        ':annee' => $annee
+    ];
+
+    if ($matricule !== null) {
+        $params[':matricule'] = $matricule;
+    }
+
+    $stmt->execute($params);
+
+    return $stmt->fetchAll(PDO::FETCH_ASSOC);
 }
 
 function getToutesLesAgences(){

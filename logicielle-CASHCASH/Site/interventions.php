@@ -1,6 +1,5 @@
 <?php 
-    $requete = 'intervention';
-    include_once '../Backend/api.php' ?>
+    include_once __DIR__.'/modeles/mesFonctionsAccesDonnes.php' ?>
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/html">
 <head>
@@ -38,7 +37,44 @@ document.getElementById("btnNouvelleIntervention").addEventListener("click", fun
 });
 </script>
     <div class="table-wrapper">
-      <?= api($requete); ?>
+
+<?php 
+
+      echo "<h2>Table : Interventions</h2>";
+      
+      $resultat2 = getTousLesInterventions();
+      
+      if ($resultat2 && count($resultat2) > 0) {
+          echo "<table>";
+      
+          // Colonnes
+          echo "<tr>";
+          foreach (array_keys($resultat2[0]) as $colonne) {
+              echo "<th>" . htmlspecialchars($colonne) . "</th>";
+          }
+          echo "</tr>";
+      
+          // Données
+          foreach ($resultat2 as $ligne) {
+      
+              $id = $ligne['id_Intervention'];
+      
+              echo '<tr class="ligne-clickable" data-id="' . htmlspecialchars($id) . '">';
+      
+              foreach ($ligne as $valeur) {
+                  echo "<td>" . htmlspecialchars($valeur) . "</td>";
+              }
+      
+              echo "</tr>";
+          }
+      
+          echo "</table>";
+      
+      } else {
+          echo "<p>Aucune donnée trouvée dans la table interventions.</p>";
+      }
+      ?>
+
     </div>
     </div>
     </div>
@@ -56,15 +92,5 @@ document.querySelectorAll('.ligne-clickable-Client').forEach(function(row) {
     });
 });
 </script>
-</body>
-</html>
-
-
-    <!-- Pied de page -->
-    <footer>
-        <p>
-            Copiright &copy; PrestInfo 2024/2025 ALL RIGHT RESERVED
-        </p>
-    </footer>
 </body>
 </html>
