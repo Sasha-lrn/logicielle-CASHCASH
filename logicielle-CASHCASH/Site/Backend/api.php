@@ -9,7 +9,11 @@ function api($requete){
     include_once __DIR__.'/getListeTechniciens.php';
     include_once __DIR__.'/getStatsTechnicien.php'; 
 
-    $testGit = "testGit Sasha Pull Request";
+    $testGit = "testGit louis";
+
+    $testGit2 = "testGit louiGEGERGs";
+
+    
 
 
     $serveur = "localhost";
