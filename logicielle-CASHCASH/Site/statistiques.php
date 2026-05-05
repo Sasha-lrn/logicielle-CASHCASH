@@ -1,15 +1,18 @@
 <?php
-    $requete = 'stats';
-    include_once __DIR__.'/../Backend/api.php';
-    $data = api($requete);
 
-$techniciens = $data['techniciens'];
-$mois = $data['mois'];
-$annee = $data['annee'];
-$matricule = $data['matricule'];
-$stats = $data['stats'];
+include_once __DIR__.'/modeles/mesFonctionsAccesDonnes.php';
+
+$techniciens = getListeTechniciens();
+
+$mois = isset($_GET['mois']) ? intval($_GET['mois']) : date('m');
+$annee = isset($_GET['annee']) ? intval($_GET['annee']) : date('Y');
+
+$matricule = !empty($_GET['technicien']) ? intval($_GET['technicien']) : null;
+
+$stats = getStatsTechnicien($mois, $annee, $matricule);
 
 ?>
+
 
 <!DOCTYPE html>
 <html lang="fr">
@@ -101,5 +104,5 @@ $stats = $data['stats'];
     </div>
 
 </div>
-
+</body>
 </html>
