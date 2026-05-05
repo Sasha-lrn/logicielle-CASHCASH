@@ -9,6 +9,8 @@ function api($requete){
     include_once __DIR__.'/getListeTechniciens.php';
     include_once __DIR__.'/getStatsTechnicien.php'; 
 
+    $testGit = "testGit Sasha";
+
 
     $serveur = "localhost";
     $utilisateur = "CashCash";
