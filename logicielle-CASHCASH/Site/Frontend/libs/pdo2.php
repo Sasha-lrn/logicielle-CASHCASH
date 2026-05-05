@@ -1,11 +1,13 @@
 <?php
 
+	include_once __DIR__.'/../global/config.php';
+	
 /**
  * Classe implémentant le singleton pour PDO
  * @author Savageman
  */
 
-class PDO2 extends PDO {
+class PDO2 {
 
 	private static $_instance;
 
@@ -14,15 +16,15 @@ class PDO2 extends PDO {
 	
 	}
 	// End of PDO2::__construct() */
-
+	
 	/* Singleton */
 	public static function getInstance() {
 	
 		if (!isset(self::$_instance)) {
 			
 			try {
-			
 				self::$_instance = new PDO(SQL_DSN, SQL_USERNAME, SQL_PASSWORD);
+
                                 self::$_instance->query("SET CHARACTER SET utf8");
                                 
 			} catch (PDOException $e) {

@@ -9,13 +9,6 @@ function api($requete){
     include_once __DIR__.'/getListeTechniciens.php';
     include_once __DIR__.'/getStatsTechnicien.php'; 
 
-    $testGit = "testGit louis";
-
-    $testGit2 = "testGit louiGEGERGs";
-
-    
-
-
     $serveur = "localhost";
     $utilisateur = "CashCash";
     $motdepasse = "3878ShOrtmUSI(";

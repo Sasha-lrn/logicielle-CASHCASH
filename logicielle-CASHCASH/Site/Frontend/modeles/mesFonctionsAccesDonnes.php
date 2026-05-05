@@ -178,9 +178,6 @@ function getToutesLesAgences(){
     return $pdo->query($sql)->fetchAll(PDO::FETCH_ASSOC);
 }
 
-
-
-
 function updateIntervention(int $id, string $date,$client)
 {
     $pdo = PDO2::getInstance();
