@@ -159,6 +159,66 @@ function getClientsLourd() {
 
     return $pdo->query($sql)->fetchAll(PDO::FETCH_ASSOC); }
 
+    function getContratMaterielJSON($numClient){
+
+        $pdo = PDO2::getInstance();
+
+        $sql = "SELECT 
+    c.NumClient,
+    cm.NumContrat,
+    cm.DateSignature,
+    cm.DateEcheance,
+    m.NumSerie,
+    m.DateInstallation,
+    m.Prix,
+    m.Emplacement,
+    t.ReferenceInterne,
+    t.Libellé
+    FROM Client c
+    LEFT JOIN Contrat_Maintenance cm ON c.NumClient = cm.NumClient
+    LEFT JOIN Maintenir mt ON cm.NumContrat = mt.NumContrat
+    LEFT JOIN Matériel m ON mt.NumSerie = m.NumSerie
+    LEFT JOIN Type t ON m.ReferenceInterne = t.ReferenceInterne
+    WHERE c.NumClient = :id";
+
+    $stmt = $pdo->prepare($sql);
+    $stmt->execute(['id' => $numClient]);
+
+    $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+    if (!$rows) return null;
+
+    // Construction du JSON structuré
+    $contrat = [
+        "NumContrat" => $rows[0]["NumContrat"],
+        "DateSignature" => $rows[0]["DateSignature"],
+        "DateEcheance" => $rows[0]["DateEcheance"],
+        "LesMaterielsAssures" => []
+    ];
+
+    foreach ($rows as $row) {
+
+        if ($row["NumSerie"]) {
+
+            $materiel = [
+                "NumSerie" => $row["NumSerie"],
+                "DateInstallation" => $row["DateInstallation"],
+                "Prix" => $row["Prix"],
+                "Emplacement" => $row["Emplacement"],
+                "LeType" => [
+                    "ReferenceInterne" => $row["ReferenceInterne"],
+                    "Libellé" => $row["Libellé"]
+                ]
+            ];
+
+            $contrat["LesMaterielsAssures"][] = $materiel;
+        }
+    }
+
+    return $contrat;
+}
+    
+
 
 function getTousLesInterventions()
 {
