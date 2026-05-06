@@ -2,12 +2,7 @@
 
 include_once __DIR__.'/../../modeles/mesFonctionsAccesDonnes.php';
 
-function gestionJson(){
-    $json = file_get_contents('php://input');
-    return json_decode($json, true);
-}
-
-function apiClients(){
+function apiContratMateriel(){
 
     $request_method = $_SERVER['REQUEST_METHOD'];
 
@@ -15,18 +10,27 @@ function apiClients(){
 
         case 'GET':
 
-            $clients = getClientsLourd();
+            if (!isset($_GET['id'])) {
+                http_response_code(400);
+                header("Content-Type: application/json; charset=utf-8"); //sert à envoyer des informations HTTP au navigateur ou au client (C#).
+                echo json_encode(["erreur" => "Paramètre id manquant"]);
+                exit;
+            }
 
-            if (!$clients) {
+            $id = intval($_GET['id']);//convertir $_GET['id'] = "12"   // string en int 12
+
+            $contrat = getContratMaterielJSON($id);
+
+            if (!$contrat) {
                 http_response_code(404);
                 header("Content-Type: application/json; charset=utf-8");
-                echo json_encode(["erreur" => "Aucun client"]);
+                echo json_encode(["erreur" => "Aucun contrat trouvé"]);
                 exit;
             }
 
             http_response_code(200);
             header("Content-Type: application/json; charset=utf-8");
-            echo json_encode($clients);
+            echo json_encode($contrat);
             exit;
 
         default:
@@ -35,6 +39,6 @@ function apiClients(){
             echo json_encode(["erreur" => "Méthode non autorisée"]);
             exit;
     }
-    
 }
-apiClients();
+
+apiContratMateriel();
