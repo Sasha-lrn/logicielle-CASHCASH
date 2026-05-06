@@ -1,3 +1,12 @@
+<?php
+session_start();
+
+if (!isset($_SESSION['user'])) {
+    header("Location: index.html");
+    exit();
+}
+?>
+
 <?php 
 include_once __DIR__ . '/modeles/mesFonctionsAccesDonnes.php';
 
@@ -122,22 +131,14 @@ if (!$infoClient) {
 <body>
 <header>
         
-        <img class="logo" src="Image/logoCashCash2.PNG" width="100">
+        <img class="logo" src="Image/logoClient.png" width="100">
         <!-- Menu de naviguation  -->
      <nav>
          <ul>
-             <li> <a href="">Accueil</a></li>
-             <li> <a href="Actualité.html">Actualité</a></li>
-             <li> <a href="contact.html">Contact</a></li>
+            <li> <a href="clients.php">Clients</a></li>
+             <li> <a href="menu.php">Menu</a></li>
          </ul>
      </nav>
-        <nav>
-            <ul>
-                <li>
-                <a href="Connexion.html" class="Connexion"> Connexion</a></li>
-                </li>
-            </ul>
-        </nav>
     </header>
 
 <div class="container">

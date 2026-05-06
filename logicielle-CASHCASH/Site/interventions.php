@@ -1,3 +1,12 @@
+<?php
+session_start();
+
+if (!isset($_SESSION['user'])) {
+    header("Location: index.html");
+    exit();
+}
+?>
+
 <?php 
     include_once __DIR__.'/modeles/mesFonctionsAccesDonnes.php' ?>
 <!DOCTYPE html>

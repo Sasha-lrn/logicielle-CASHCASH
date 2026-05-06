@@ -1,3 +1,23 @@
+@media print {
+    /* Cache les éléments inutiles */
+    nav, button, .no-print {
+      display: none;
+    }
+  
+    /* Ajuste la mise en page */
+    body {
+      margin: 0;
+      font-size: 12px;
+    }
+  
+    /* Eviter les coupures */
+    .section {
+      page-break-inside: avoid;
+    }
+  }
+
+
+
 
 img.Accueil {
 	margin-left: 5%;
