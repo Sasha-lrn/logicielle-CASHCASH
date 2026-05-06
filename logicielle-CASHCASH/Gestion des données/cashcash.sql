@@ -6,6 +6,19 @@
 -- Généré le : mer. 06 mai 2026 à 07:16
 -- Version du serveur : 10.3.39-MariaDB-0+deb10u1
 -- Version de PHP : 8.2.7
+DROP DATABASE IF EXISTS cashcash;
+
+CREATE DATABASE cashcash CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
+
+GRANT ALL PRIVILEGES ON cashcash.* TO 'cashcash'@'%';
+
+FLUSH PRIVILEGES;
+
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+START TRANSACTION;
+SET time_zone = "+00:00";
+
+USE cashcash;
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
