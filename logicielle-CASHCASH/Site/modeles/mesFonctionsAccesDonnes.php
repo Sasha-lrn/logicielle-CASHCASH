@@ -203,7 +203,7 @@ function getClientsLourd() {
             $materiel = [
                 "NumSerie" => $row["NumSerie"],
                 "DateInstallation" => $row["DateInstallation"],
-                "Prix" => $row["Prix"],
+                "Prix" => floatval($row["Prix"]),
                 "Emplacement" => $row["Emplacement"],
                 "LeType" => [
                     "ReferenceInterne" => $row["ReferenceInterne"],
