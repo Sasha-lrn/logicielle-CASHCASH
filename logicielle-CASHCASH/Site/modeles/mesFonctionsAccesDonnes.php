@@ -147,6 +147,48 @@ function getTousLesClients()
 
     return $pdo->query($sql)->fetchAll(PDO::FETCH_ASSOC);
 }
+function getClientsRecherche($type, $valeur)
+{
+    $pdo = PDO2::getInstance();
+
+    // Liste blanche des colonnes autorisées
+    $colonnesAutorisees = [
+        'RaisonSociale', 
+        'AdressePostale', 
+        'NumTel', 
+        'Email', 
+        'NumClient', 
+        'DistanceAgenceKm'
+    ];
+    
+    if (!in_array($type, $colonnesAutorisees)) {
+        return [];
+    }
+    
+    // 2. On prépare la requête SQL (les % ne sont plus ici)
+    $sql = "
+        SELECT 
+            c.RaisonSociale,
+            c.AdressePostale,
+            c.NumTel,
+            c.Email,
+            c.NumClient,
+            c.DistanceAgenceKm 
+        FROM Client c
+        WHERE LOWER(c.$type) LIKE LOWER(:valeur)
+    ";
+    
+    $req = $pdo->prepare($sql);
+    
+    // 3. On ajoute les % à la valeur AVANT de l'envoyer à la requête
+    // On utilise bindValue ou on le passe dans l'execute
+    $recherche = "%" . $valeur . "%";
+    $req->bindValue(':valeur', $recherche, PDO::PARAM_STR);
+    
+    $req->execute();
+    
+    return $req->fetchAll(PDO::FETCH_ASSOC);
+}
 
 function getClientsLourd() {
 

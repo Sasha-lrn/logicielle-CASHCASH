@@ -1,26 +1,41 @@
 <?php
 session_start();
+include_once __DIR__ . '/libs/pdo2.php';
 
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
-    $email = $_POST['email'] ?? '';
+    $login = $_POST['login'] ?? '';
     $password = $_POST['password'] ?? '';
 
-    // ⚠️ test (à remplacer par BDD après)
-    $valid_email = "admin@prestinfo.fr";
-    $valid_password = "1234";
+    try {
+        // Connexion BDD
+        $pdo = PDO2::getInstance();
+        $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-    if ($email === $valid_email && $password === $valid_password) {
+        // 🔐 requête préparée (anti SQL injection)
+        $stmt = $pdo->prepare("SELECT Matricule, login, motDePasse FROM Employé WHERE login = :login");
+        $stmt->execute(['login' => $login]);
 
-        // connexion OK
-        $_SESSION['user'] = $email;
+        $user = $stmt->fetch(PDO::FETCH_ASSOC);
 
-        header("Location: menu.php");
-        exit();
+        // 🔑 SHA1 comparison
+        if ($user && $user['motDePasse'] === sha1($password)) {
 
-    } else {
-        // erreur connexion
-        echo "Email ou mot de passe incorrect";
+            session_regenerate_id(true); // sécurité session
+
+            $_SESSION['user_id'] = $user['Matricule'];
+            $_SESSION['login'] = $user['login'];
+
+            header("Location: menu.php");
+            exit();
+
+        } else {
+            echo "Email ou mot de passe incorrect";
+        }
+
+    } catch (PDOException $e) {
+        echo "Erreur serveur";
+        
     }
 }
 ?>
