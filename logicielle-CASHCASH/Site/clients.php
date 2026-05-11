@@ -1,7 +1,7 @@
 <?php
 session_start();
 
-if (!isset($_SESSION['user'])) {
+if (!isset($_SESSION['login'])) {
     header("Location: index.html");
     exit();
 }
@@ -38,22 +38,110 @@ include_once __DIR__.'/modeles/mesFonctionsAccesDonnes.php' ?>
 
     <div class="blockFormulaire">
   <div class="Formulaire">
+  <div class="search-wrapper">
+  <form class="search-container">
+    <input type="text" id="search-input" placeholder="Rechercher..." autocomplete="off">
+  </form>
+  <!-- La liste qui apparaîtra dynamiquement -->
+  <div id="results-list" class="results-hidden"></div>
+</div>
+  
+</form>
   <button type="button" id="btnNouvelleIntervention">Nouveau client</button>
+
+  
+  <script>
+const input = document.querySelector('#search-input');
+const resultsList = document.querySelector('#results-list');
+let tousLesClients = [];
+
+fetch('recherche.php')
+  .then(response => response.json())
+  .then(data => {
+    tousLesClients = data;
+    console.log("Données chargées :", tousLesClients.length, "clients");
+  })
+  .catch(error => console.error("Erreur de chargement :", error));
+
+input.addEventListener('input', (e) => {
+  const query = e.target.value.toLowerCase();
+  resultsList.innerHTML = "";
+
+  if (query.length > 0) {
+    const configChamps = [
+      { label: "Raisons Sociales", key: "RaisonSociale" },
+      { label: "Adresses Postales", key: "AdressePostale" },
+      { label: "Numéros de Téléphone", key: "NumTel" },
+      { label: "Emails", key: "Email" },
+      { label: "Numéros Clients", key: "NumClient" },
+      { label: "Distances Agences", key: "DistanceAgenceKm" }
+    ];
+
+    // On utilise un objet pour stocker les correspondances uniques
+    // Format : { "Nom Affiché": "cle_technique" }
+    const correspondances = {};
+
+    tousLesClients.forEach(client => {
+      configChamps.forEach(champ => {
+        const valeur = String(client[champ.key] || "").toLowerCase();
+        
+        if (valeur !== "0" && valeur.includes(query)) {
+          // On ajoute au dictionnaire : le label est la clé pour l'unicité
+          correspondances[champ.label] = champ.key;
+        }
+      });
+    });
+
+    // On boucle sur les clés de notre dictionnaire (les labels)
+    Object.keys(correspondances).forEach(label => {
+      const cleTechnique = correspondances[label];
+      
+      const item = document.createElement('div');
+      item.classList.add('result-item');
+      item.textContent = label; // Affiche "Numéros Clients"
+      
+      item.onclick = () => {
+        // Envoie "NumClient" et la saisie à la fonction
+        maFonctionDeRecherche(cleTechnique, query);
+      };
+      
+      resultsList.appendChild(item);
+    });
+
+    resultsList.classList.toggle('results-hidden', Object.keys(correspondances).length === 0);
+  } else {
+    resultsList.classList.add('results-hidden');
+  }
+});
+
+function maFonctionDeRecherche(type, valeur) {
+  console.log("Exécution de la recherche pour le champ technique : " + type);
+  
+  // Correction de l'URL pour qu'elle soit propre (format standard ?type=val&nom=val)
+  // J'ai remplacé la virgule par un '&' qui est le séparateur standard d'URL
+  window.location.href = "clients.php?type=" + encodeURIComponent(type) + "&valeur=" + encodeURIComponent(valeur);
+}
+
+
+
+  </script>
 
 <script>
 document.getElementById("btnNouvelleIntervention").addEventListener("click", function() {
     // Redirection vers EditIntervention.php?id=
     window.location.href = "EditClient.php?id=";
 });
-</script>
+</script></div>
     <div class="table-wrapper">
       <?php 
          
        
         echo "<h2>Table : Clients</h2>";
-
-        $resultat1 = getTousLesClients();
-
+        if (!empty($_GET['type']) && !empty($_GET['valeur'])) {
+            $resultat1 = getClientsRecherche($_GET['type'], $_GET['valeur']);
+        } else {
+            $resultat1 = getTousLesClients();
+        }
         if ($resultat1 && count($resultat1) > 0) {
             echo "<table>";
         

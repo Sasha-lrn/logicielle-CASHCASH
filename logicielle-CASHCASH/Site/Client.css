@@ -114,6 +114,11 @@ td {
     
 }
 
+.Formulaire {
+    justify-content: space-between;
+    align-items: center;
+}
+
 
 
 .Connexion{
@@ -159,3 +164,72 @@ header h1.welcome, nav{
 header img.logo {
 	margin: 6px;
 }
+
+
+
+
+
+.search-container {
+    display: flex;
+    max-width: 500px;
+    margin: 20px auto;
+  }
+  
+  #search-input {
+    flex: 1;
+    padding: 10px;
+    border: 2px solid #ddd;
+    border-radius: 5px 0 0 5px;
+    outline: none;
+  }
+  
+  #search-input:focus {
+    border-color: #cf8610; /* Change de couleur au clic */
+  }
+  
+  #search-button {
+    padding: 10px 20px;
+    background-color: #cf8610;
+    color: white;
+    border: none;
+    border-radius: 0 5px 5px 0;
+    cursor: pointer;
+  }
+  
+  #search-button:hover {
+    background-color: #cf8610;
+  }
+
+  .search-wrapper {
+    position: relative; /* Important pour le positionnement de la liste */
+    max-width: 400px;
+    margin: auto;
+  }
+  
+  #results-list {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background: white;
+    border: 1px solid #ccc;
+    border-top: none;
+    z-index: 1000;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+  }
+  
+  .result-item {
+    padding: 10px;
+    cursor: pointer;
+    border-bottom: 1px solid #eee;
+    font-size: 14px;
+  }
+  
+  .result-item:hover {
+    background-color: #f0f7ff;
+    color: #007BFF;
+  }
+  
+  .results-hidden {
+    display: none;
+  }
