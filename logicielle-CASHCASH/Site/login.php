@@ -13,11 +13,14 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
         // 🔐 requête préparée (anti SQL injection)
-        $stmt = $pdo->prepare("SELECT Matricule, login, motDePasse FROM Employé WHERE login = :login");
+        $stmt = $pdo->prepare("SELECT Employé.Matricule, login, motDePasse, TypeEmployé.Type FROM Employé 
+        INNER JOIN TypeEmployé on Employé.Matricule = TypeEmployé.Matricule
+        WHERE login = :login");
         $stmt->execute(['login' => $login]);
 
         $user = $stmt->fetch(PDO::FETCH_ASSOC);
 
+        
         // 🔑 SHA1 comparison
         if ($user && $user['motDePasse'] === sha1($password)) {
 
@@ -25,6 +28,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
             $_SESSION['user_id'] = $user['Matricule'];
             $_SESSION['login'] = $user['login'];
+            $_SESSION['typeEmploye'] = $user['Type'];
 
             header("Location: menu.php");
             exit();
