@@ -37,7 +37,90 @@ if (!isset($_SESSION['login'])) {
 
     <div class="blockFormulaire">
   <div class="Formulaire">
+  <div class="search-wrapper">
+  <form class="search-container">
+    <input type="text" id="search-input" placeholder="Rechercher..." autocomplete="off">
+  </form>
+  <!-- La liste qui apparaîtra dynamiquement -->
+  <div id="results-list" class="results-hidden"></div>
+</div>
+</form>
   <button type="button" id="btnNouvelleIntervention">Nouvelle intervention</button>
+  <script>
+const input = document.querySelector('#search-input');
+const resultsList = document.querySelector('#results-list');
+let toutesLesInterventions = [];
+
+fetch('rechercheIntervention.php')
+  .then(response => response.json())
+  .then(data => {
+    toutesLesInterventions = data;
+    console.log(toutesLesInterventions)
+    console.log("Données chargées :", toutesLesInterventions.length, "interventions");
+  })
+  .catch(error => console.error("Erreur de chargement :", error));
+
+input.addEventListener('input', (e) => {
+  const query = e.target.value.toLowerCase();
+  resultsList.innerHTML = "";
+
+  if (query.length > 0) {
+    const configChamps = [
+      { label: "id_Intervention", key: "id_Intervention" },
+      { label: "Date", key: "Date_" },
+      { label: "Num CLient", key: "NumClient" },
+      { label: "Matricule", key: "Matricule" }
+    ];
+
+    // On utilise un objet pour stocker les correspondances uniques
+    // Format : { "Nom Affiché": "cle_technique" }
+    const correspondances = {};
+
+    toutesLesInterventions.forEach(intervention => {
+      configChamps.forEach(champ => {
+        const valeur = String(intervention[champ.key] || "").toLowerCase();
+        
+        if (valeur !== "0" && valeur.includes(query)) {
+          // On ajoute au dictionnaire : le label est la clé pour l'unicité
+          correspondances[champ.label] = champ.key;
+        }
+      });
+    });
+
+    // On boucle sur les clés de notre dictionnaire (les labels)
+    Object.keys(correspondances).forEach(label => {
+      const cleTechnique = correspondances[label];
+      
+      const item = document.createElement('div');
+      item.classList.add('result-item');
+      item.textContent = label; // Affiche "Numéros Clients"
+      
+      item.onclick = () => {
+        // Envoie "NumClient" et la saisie à la fonction
+        maFonctionDeRecherche(cleTechnique, query);
+      };
+      
+      resultsList.appendChild(item);
+    });
+
+    resultsList.classList.toggle('results-hidden', Object.keys(correspondances).length === 0);
+  } else {
+    resultsList.classList.add('results-hidden');
+  }
+});
+
+function maFonctionDeRecherche(type, valeur) {
+  console.log("Exécution de la recherche pour le champ technique : " + type);
+  
+  // Correction de l'URL pour qu'elle soit propre (format standard ?type=val&nom=val)
+  // J'ai remplacé la virgule par un '&' qui est le séparateur standard d'URL
+  window.location.href = "interventions.php?type=" + encodeURIComponent(type) + "&valeur=" + encodeURIComponent(valeur);
+}
+
+
+
+  </script>
+
 
 <script>
 document.getElementById("btnNouvelleIntervention").addEventListener("click", function() {
@@ -50,8 +133,12 @@ document.getElementById("btnNouvelleIntervention").addEventListener("click", fun
 <?php 
 
       echo "<h2>Table : Interventions</h2>";
-      
-      $resultat2 = getTousLesInterventions();
+      if (!empty($_GET['type']) && !empty($_GET['valeur'])) {
+        $resultat2 = getInterventionsRecherche($_GET['type'], $_GET['valeur']);
+      }
+      else{
+        $resultat2 = getTousLesInterventions();
+      }
       
       if ($resultat2 && count($resultat2) > 0) {
           echo "<table>";

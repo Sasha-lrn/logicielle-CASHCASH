@@ -190,6 +190,45 @@ function getClientsRecherche($type, $valeur)
     return $req->fetchAll(PDO::FETCH_ASSOC);
 }
 
+
+function getInterventionsRecherche($type, $valeur)
+{
+    $pdo = PDO2::getInstance();
+
+    // Liste blanche des colonnes autorisées
+    $colonnesAutorisees = [
+        'id_Intervention', 
+        'Date_', 
+        'NumClient', 
+        'Matricule'
+    ];
+    
+    if (!in_array($type, $colonnesAutorisees)) {
+        return [];
+    }
+    
+    // 2. On prépare la requête SQL (les % ne sont plus ici)
+    $sql = "
+        SELECT 
+            i.Id_Intervention,
+            i.Date_,
+            i.NumClient,
+            i.Matricule 
+        FROM Intervention i
+        WHERE LOWER(i.$type) LIKE LOWER(:valeur)
+    ";
+    
+    $req = $pdo->prepare($sql);
+    
+    // 3. On ajoute les % à la valeur AVANT de l'envoyer à la requête
+    // On utilise bindValue ou on le passe dans l'execute
+    $recherche = "%" . $valeur . "%";
+    $req->bindValue(':valeur', $recherche, PDO::PARAM_STR);
+    
+    $req->execute();
+    
+    return $req->fetchAll(PDO::FETCH_ASSOC);
+}
 function getClientsLourd() {
 
     $pdo = PDO2::getInstance();
