@@ -5,6 +5,8 @@ if (!isset($_SESSION['login'])) {
     header("Location: index.html");
     exit();
 }
+
+
 ?>
 
 <!DOCTYPE html>
@@ -22,7 +24,11 @@ if (!isset($_SESSION['login'])) {
     <img class="imageaccueil" src="Image/fondMenu.jpg" >
     <a href= interventions.php><img class = "imageMenu" src="Image/logoIntervention.png" width = "150"></a>
     <a href= clients.php><img class = "imageMenu" src="Image/logoClient.png" width = "150"></a>
-    <a href= statistiques.php><img class = "imageMenu" src="Image/logoStatistique.png" width = "150"></a>
+    <?php if ($_SESSION['typeEmploye'] === 'gerant') : ?>
+    <a href="statistiques.php">
+        <img class="imageMenu" src="Image/logoStatistique.png" width="150">
+    </a>
+    <?php endif; ?>
     <a href= deconnexion.php><img class = "imageMenu" src="Image/logoAccueil.png" width = "150"></a>
     </div>
 

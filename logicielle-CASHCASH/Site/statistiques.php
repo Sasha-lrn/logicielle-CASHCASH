@@ -1,10 +1,21 @@
 <?php
 session_start();
 
-if (!isset($_SESSION['user'])) {
+if (!isset($_SESSION['login'])) {
     header("Location: index.html");
     exit();
 }
+if (!isset($_SESSION['typeEmploye'])) {
+    header("Location: menu.php");
+    exit();
+}
+if (isset($_SESSION['typeEmploye'])) {
+    if ($_SESSION['typeEmploye']!= 'gerant'){
+        header("Location: menu.php");
+    }
+    
+}
+
 ?>
 
 
