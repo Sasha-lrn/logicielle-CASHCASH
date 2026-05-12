@@ -193,7 +193,7 @@ function getClientsLourd() {
         "NumContrat" => $rows[0]["NumContrat"],
         "DateSignature" => $rows[0]["DateSignature"],
         "DateEcheance" => $rows[0]["DateEcheance"],
-        "LesMaterielsAssures" => []
+        "LesMateriels" => []
     ];
 
     foreach ($rows as $row) {
@@ -211,7 +211,7 @@ function getClientsLourd() {
                 ]
             ];
 
-            $contrat["LesMaterielsAssures"][] = $materiel;
+            $contrat["LesMateriels"][] = $materiel;
         }
     }
 
