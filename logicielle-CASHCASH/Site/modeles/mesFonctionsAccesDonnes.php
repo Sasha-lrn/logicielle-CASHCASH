@@ -259,8 +259,20 @@ function getClientsLourd() {
 
     return $contrat;
 }
-    
 
+function renouvellementJSON($numClient){
+
+    $pdo = PDO2::getInstance();
+
+    $sql = "";// doit update date renouvellement et date expiration
+}
+
+function ajoutMatérielJSON($numClient){
+
+    $pdo = PDO2::getInstance();
+
+    $sql = "";// doit ajouter un matériel à la liste en C# puis ajouter materiel(instancié en C#) à un contrat(sélectioné en C#) et table de liaison maintenir
+}
 
 function getTousLesInterventions()
 {
@@ -466,7 +478,7 @@ function createIntervention($date, $client, $technicien)
     $req->bindValue(':technicien', $technicien, PDO::PARAM_INT);
     $req->execute();
 
-    return $pdo->lastInsertId(); // 🔥 super important
+    return $pdo->lastInsertId(); // super important
 }
 function createClient($RaisonSociale, $Num_Agence)
 {
