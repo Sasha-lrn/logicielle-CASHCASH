@@ -33,11 +33,93 @@ function apiContratMateriel(){
             echo json_encode($contrat);
             exit;
 
-        default:
+        
+
+
+        case 'PUT':
+                // Récupère le corps JSON envoyé par le client
+                $data = json_decode(file_get_contents('php://input'), true);
+            
+                if (!isset($data['NumContrat']) || !isset($data['DateEcheance'])) {
+                    http_response_code(400);
+                    header("Content-Type: application/json; charset=utf-8");
+                    echo json_encode(["erreur" => "Paramètres manquants"]);
+                    exit;
+                }
+            
+                $numContrat = intval($data['NumContrat']);
+                $dateEcheance = $data['DateEcheance'];
+                $dateRenouvellement = isset($data['DateRenouvellement']) ? $data['DateRenouvellement'] : null;
+            
+                // Appelle une fonction pour faire l'update en base
+                $result = updateRenouvellementContrat($numContrat, $dateEcheance, $dateRenouvellement);
+            
+                if ($result) {
+                    http_response_code(200);
+                    header("Content-Type: application/json; charset=utf-8");
+                    echo json_encode(["message" => "Contrat mis à jour"]);
+                } else {
+                    http_response_code(500);
+                    header("Content-Type: application/json; charset=utf-8");
+                    echo json_encode(["erreur" => "Erreur lors de la mise à jour"]);
+                }
+                exit;
+
+        case 'POST':
+
+                    if (!isset($_GET['numContrat'])) {
+                
+                        http_response_code(400);
+                
+                        echo json_encode([
+                            "erreur" => "numContrat manquant"
+                        ]);
+                
+                        exit;
+                    }
+                
+                    $numContrat = intval($_GET['numContrat']);
+                
+                    $data = json_decode(file_get_contents('php://input'), true);
+                
+                    if (!$data) {
+                
+                        http_response_code(400);
+                
+                        echo json_encode([
+                            "erreur" => "JSON invalide"
+                        ]);
+                
+                        exit;
+                    }
+                
+                    $result = ajouterMaterielAuContrat($numContrat, $data);
+                
+                    if ($result) {
+                
+                        http_response_code(201);
+                
+                        echo json_encode([
+                            "message" => "Matériel ajouté"
+                        ]);
+                    }
+                    else {
+                
+                        http_response_code(500);
+                
+                        echo json_encode([
+                            "erreur" => "Erreur insertion matériel"
+                        ]);
+                    }
+                
+                    exit;
+                
+            default:
             http_response_code(405);
             header("Content-Type: application/json; charset=utf-8");
             echo json_encode(["erreur" => "Méthode non autorisée"]);
             exit;
+            
     }
 }
 

@@ -299,11 +299,132 @@ function getClientsLourd() {
     return $contrat;
 }
 
-function renouvellementJSON($numClient){
-
+function updateRenouvellementContrat($numContrat, $dateEcheance, $dateRenouvellement = null)
+{
     $pdo = PDO2::getInstance();
 
-    $sql = "";// doit update date renouvellement et date expiration
+    // Si aucune date de renouvellement fournie
+    if ($dateRenouvellement === null) {
+        $dateRenouvellement = date('Y-m-d H:i:s');
+    }
+
+    try {
+
+        // Début transaction
+        $pdo->beginTransaction();
+
+        // 1. Mise à jour du contrat
+        $sql = "
+            UPDATE Contrat_Maintenance
+            SET DateEcheance = :dateEcheance
+            WHERE NumContrat = :numContrat
+        ";
+
+        $stmt = $pdo->prepare($sql);
+
+        $stmt->bindParam(':dateEcheance', $dateEcheance);
+        $stmt->bindParam(':numContrat', $numContrat, PDO::PARAM_INT);
+
+        $stmt->execute();
+
+        // 2. Insertion du renouvellement
+        $sql2 = "
+            INSERT INTO Renouvellement (Date_, NumContrat)
+            VALUES (:dateRenouvellement, :numContrat)
+        ";
+
+        $stmt2 = $pdo->prepare($sql2);
+
+        $stmt2->bindParam(':dateRenouvellement', $dateRenouvellement);
+        $stmt2->bindParam(':numContrat', $numContrat, PDO::PARAM_INT);
+
+        $stmt2->execute();
+
+        // Validation
+        $pdo->commit();
+
+        return true;
+
+    } catch (PDOException $e) {
+
+        $pdo->rollBack();
+
+        return false;
+    }
+
+    function ajouterMaterielAuContrat($numContrat, $materiel)
+{
+    $pdo = PDO2::getInstance();
+
+    try {
+
+        $pdo->beginTransaction();//on va éxécuter deux requêtes
+
+        // Insertion matériel
+        $sql = "
+            INSERT INTO Matériel
+            (
+                NumSerie,
+                DateInstallation,
+                Prix,
+                Emplacement,
+                ReferenceInterne
+            )
+            VALUES
+            (
+                :numSerie,
+                :dateInstallation,
+                :prix,
+                :emplacement,
+                :referenceInterne
+            )
+        ";
+
+        $stmt = $pdo->prepare($sql);
+
+        $stmt->bindParam(':numSerie', $materiel['NumSerie'], PDO::PARAM_INT);
+        $stmt->bindParam(':dateInstallation', $materiel['DateInstallation']);
+        $stmt->bindParam(':prix', $materiel['Prix']);
+        $stmt->bindParam(':emplacement', $materiel['Emplacement']);
+        $stmt->bindParam(':referenceInterne', $materiel['LeType']['ReferenceInterne'], PDO::PARAM_INT);
+
+        $stmt->execute();
+
+        // Liaison contrat/matériel
+        $sql2 = "
+            INSERT INTO Maintenir
+            (
+                NumSerie,
+                NumContrat
+            )
+            VALUES
+            (
+                :numSerie,
+                :numContrat
+            )
+        ";
+
+        $stmt2 = $pdo->prepare($sql2);
+
+        $stmt2->bindParam(':numSerie', $materiel['NumSerie'], PDO::PARAM_INT);
+        $stmt2->bindParam(':numContrat', $numContrat, PDO::PARAM_INT);
+
+        $stmt2->execute();
+
+        $pdo->commit();//envoie les deux requêtes en même temps
+
+        return true;
+
+    }
+    catch (PDOException $e) {
+
+        $pdo->rollBack();//annule les dezux requêtes
+
+        error_log($e->getMessage());
+
+        return false;
+    }
+}
 }
 
 function ajoutMatérielJSON($numClient){
